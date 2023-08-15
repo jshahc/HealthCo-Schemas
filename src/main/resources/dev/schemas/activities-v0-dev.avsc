@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "Schema",
+  "fields": [
+    {
+      "name": "currentLocation",
+      "type": "string"
+    },
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "startLocation",
+      "type": "string"
+    },
+    {
+      "name": "userId",
+      "type": "int"
+    }
+  ]
+}

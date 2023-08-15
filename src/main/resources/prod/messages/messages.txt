@@ -1,0 +1,4 @@
+{"id":"Walk#452112","userId":454334,"startLocation":"19.0760,72.8777","currentLocation":"19.0760,72.8912"}
+{"id":"Walk#452112","userId":454334,"startLocation":"19.0760,72.8777","currentLocation":"19.0760,72.8914","heatRate":"159/76","o2Sat":"99"}
+{"id":"Walk#452152","userId":454334,"startLocation":"19.0740,72.8777","currentLocation":"19.0760,72.8912","time":"1678716390"}
+{"id":"452116","userId":454334,"startLocation":"19.0760,72.8777","currentLocation":"19.0760,72.8914"}

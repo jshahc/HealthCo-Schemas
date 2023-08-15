@@ -1,0 +1,37 @@
+# Workflow to Register Schema on merge of pull request
+name: Register Schema
+
+# Trigger the workflow when code is pushed to the 'master' branch
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/main/resources/prod/schemas/*'
+
+# Confluent Cloud Schema Registry Information
+env:
+  SCHEMA_REGISTRY_URL: ${{ secrets.SCHEMA_REGISTRY_URL }}
+  SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: "${{ secrets.SCHEMA_REGISTRY_USERNAME }}:${{ secrets.SCHEMA_REGISTRY_PASSWORD }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the code
+      - uses: actions/checkout@v2
+
+      # Step 2: Set up JDK 20
+      - name: Set up JDK 20
+        uses: actions/setup-java@v2
+        with:
+          java-version: '20'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: "Testing Variables"
+        run: echo "$SCHEMA_REGISTRY_URL, $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO!"
+
+      # Step 3: Register Schema
+      - name: Register Schema
+        run: mvn io.confluent:kafka-schema-registry-maven-plugin:register "-DschemaRegistryUrl=$SCHEMA_REGISTRY_URL" "-DschemaRegistryBasicAuthUserInfo=$SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO"
+
