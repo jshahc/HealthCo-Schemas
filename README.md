@@ -1,51 +1,70 @@
-# HealthCo
+# HealthCo Schema Management Guide
 
-Repository to store and manage schemas for our cloud. There are 2 workflows:
+Welcome to the HealthCo Schema Management repository. This repository serves as a central hub for storing and managing
+schemas for our cloud infrastructure. The schema management process is divided into two primary workflows: Pull Request
+Workflow and Push Workflow.
 
-1. pull-request: validate schema, test compatibility locally and with subject
-2. push: register schema with schema registry
+## Pull Request Workflow
+
+The Pull Request Workflow ensures that schemas are thoroughly validated and compatible before they are merged and
+registered. This workflow involves the following steps:
+
+1. **Schema Validation**: Ensure the correctness of the schema and its structure. The schema's subject name and path are
+   to be provided for validation.
+
+2. **Local Compatibility Test**: Test the compatibility of the new schema with existing schemas in the local
+   environment. Provide details such as the location of existing schemas, the schema to be tested, compatibility level,
+   and schema type.
+
+3. **Set Compatibility Level**: Set the compatibility level for the subject. Specify the desired compatibility level.
+
+4. **Cloud Compatibility Test**: Verify compatibility with the subject on the cloud. Provide subject name, compatibility
+   level, and schema type for testing.
+
+The `test local compatibility` goal can be utilized to confirm that the schema intended for publication is compatible
+with the development environment locally. It's important to note that registration of development schemas on the cloud
+is not necessary for this step. Ensure that the specified subject exists; otherwise, the workflow will fail.
+
+## Push Workflow
+
+The Push Workflow focuses on registering schemas once they have been validated and confirmed to be compatible. The
+workflow encompasses the following stages:
+
+1. **Schema Validation**: Ensure the correctness of the schema and its structure. The schema's subject name and path are
+   required.
+
+2. **Schema Registration**: Register the validated schema. Provide details such as the subject name, schema path, and
+   schema type.
 
 ## Adding a Schema
 
-1. Add the file to `src/resources/prod/schemas`, update the `latestSchema` variable in  `pom.xml` and create a PR.
-2. Make sure the compatibility checks for the PR pass before merging.
-3. On merging the PR, the schema would be registered.
+To add a new schema to the repository, follow these steps:
+
+1. Place the schema file in the `src/resources/prod/schemas` directory.
+2. Update the `latestSchema` variable in the `pom.xml` file to reflect the changes.
+3. Create a pull request with the updated schema.
+4. Ensure that compatibility checks for the pull request pass before merging.
+
+Upon merging the pull request, the schema will be automatically registered.
 
 ## Setup
 
-Follow [Schema Registry Maven Plugin](https://docs.confluent.io/platform/current/schema-registry/develop/maven-plugin.html)
-for details on each goal. The arguments for each goal is defined in the `pom.xml` file.
+Refer to
+the [Schema Registry Maven Plugin documentation](https://docs.confluent.io/platform/current/schema-registry/develop/maven-plugin.html)
+for comprehensive details about each goal. The arguments for each goal are defined in the `pom.xml` file.
 
-### Pull-Request Workflow
+### Important Reminders
 
-[This workflow](.github/workflows/pull-request.yaml) does the following:
+1. Add the following secrets as GitHub actions: `SCHEMA_REGISTRY_URL`, `SCHEMA_REGISTRY_USERNAME`,
+   and `SCHEMA_REGISTRY_PASSWORD`. These secrets are vital for the actions to function correctly. You can manage these
+   secrets in the GitHub repository settings.
 
-1. Validates the schema. (Subject name and path of schema is to be provided)
-2. Tests compatibility locally with existing schemas. (Location of existing schemas, schema to test, compatibility level
-   and schema type is to be provided)
-3. Sets compatibility for subject. (compatibility level is to be provided)
-4. Tests compatibility with subject on cloud. (Subject name. compatibility level and schema type is to be provided)
+   ![GitHub Secrets](src/test/resources/GitHub_Secrets.png)
 
-Test local compatibility goal can be used to verify that the schema to be published is compatible with dev environment
-locally. You don't need to register the dev schemas on the cloud. Please make the sure the subject exists else this
-workflow would fail.
+2. For the initial schema of a subject, direct registration without compatibility checks is necessary since the subject
+   does not exist. In such cases, either merge the schema directly into the main branch or register the first schema
+   using the UI/API. For more details, refer to
+   the [Confluent Cloud Schema Registry Tutorial](https://docs.confluent.io/cloud/current/sr/schema_registry_ccloud_tutorial.html).
 
-### Push Workflow
-
-[This workflow](.github/workflows/push.yaml) does the following:
-
-1. Validates the schema. (Subject name and path of schema is to be provided)
-2. Registers the schema. (Subject name, path of schema and schema type is to be provided)
-
-### Points to Remember
-
-1. Add the `SCHEMA_REGISTRY_URL`, `SCHEMA_REGISTRY_USERNAME` and `SCHEMA_REGISTRY_PASSWORD` as secrets for GiHub
-   actions.
-   ![img.png](src/test/resources/GitHub_Secrets.png)
-2. The first schema for a subject should be registered directly without compatibility checks because the subject doesn't
-   exist. So, the pull-request workflow would fail. Hence, merge schema directly to main branch or register the first
-   schema
-   using the UI/API. [Reference](https://docs.confluent.io/cloud/current/sr/schema_registry_ccloud_tutorial.html)
-
-
-
+Thank you for your contributions to HealthCo's schema management. If you have any questions or need assistance, don't
+hesitate to reach out to our team. Happy coding!
