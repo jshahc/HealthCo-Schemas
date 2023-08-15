@@ -28,10 +28,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: "Testing Variables"
-        run: echo "$SCHEMA_REGISTRY_URL, $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO!"
+      # Step 3: Validate Schema
+      - name: Validate Schema
+        run: mvn io.confluent:kafka-schema-registry-maven-plugin:validate
 
-      # Step 3: Register Schema
+      # Step 4: Register Schema
       - name: Register Schema
         run: mvn io.confluent:kafka-schema-registry-maven-plugin:register "-DschemaRegistryUrl=$SCHEMA_REGISTRY_URL" "-DschemaRegistryBasicAuthUserInfo=$SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO"
 

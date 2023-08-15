@@ -35,7 +35,7 @@
                     </schemaRegistryUrls>
                     <userInfoConfig>${schemaRegistryBasicAuthUserInfo}</userInfoConfig>
 
-                    <!-- Used by validate, test-compatibility, test-compatibility, register goal-->
+                    <!-- Used by validate, test-compatibility, register goal-->
                     <subjects>
                         <activities-value>${latestSchema}</activities-value>
                     </subjects>
