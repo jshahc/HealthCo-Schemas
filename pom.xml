@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.confluent</groupId>
+    <artifactId>HealthCo-Schemas</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <!-- schemaRegistryUrl, schemaRegistryBasicAuthUserInfo are set up as GitHub secrets and passed as arguments -->
+        <schemaRegistryUrl></schemaRegistryUrl>
+        <schemaRegistryBasicAuthUserInfo></schemaRegistryBasicAuthUserInfo>
+        <latestSchema>src/main/resources/prod/schemas/activities-v0.avsc</latestSchema>
+    </properties>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>7.4.1</version>
+                <configuration>
+                    <!-- Used by all goals -->
+                    <schemaRegistryUrls>
+                        <param>${schemaRegistryUrl}</param>
+                    </schemaRegistryUrls>
+                    <userInfoConfig>${schemaRegistryBasicAuthUserInfo}</userInfoConfig>
+
+                    <!-- Used by validate, test-compatibility, test-compatibility, register goal-->
+                    <subjects>
+                        <activities-value>${latestSchema}</activities-value>
+                    </subjects>
+
+                    <!-- Used by test-local-compatibility goal -->
+                    <!-- Schema against which local compatibility test is performed -->
+                    <schemas>
+                        <activities-value>${latestSchema}</activities-value>
+                    </schemas>
+
+                    <!-- Used by test-local-compatibility goal-->
+                    <!-- Run compatibility tests against dev schemas locally-->
+                    <previousSchemaPaths>
+                        <activities-value>src/main/resources/dev/schemas</activities-value>
+                    </previousSchemaPaths>
+
+                    <!-- Used by test-local-compatibility, set-compatibility, test-compatibility goal-->
+                    <!-- Specifies the compatibility level for goals-->
+                    <compatibilityLevels>
+                        <activities-value>BACKWARD</activities-value>
+                    </compatibilityLevels>
+
+                    <!-- Used by test-local-compatibility, test-compatibility, register goal-->
+                    <schemaTypes>
+                        <activities-value>AVRO</activities-value>
+                    </schemaTypes>
+
+                    <!-- Used by derive-schema -->
+                    <messagePath>src/main/resources/prod/messages/messages.txt</messagePath>
+                    <schemaType>avro</schemaType>
+                    <outputPath>src/main/resources/prod/messages/schema_output.json</outputPath>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
