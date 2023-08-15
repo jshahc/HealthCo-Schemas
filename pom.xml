@@ -12,7 +12,7 @@
         <!-- schemaRegistryUrl, schemaRegistryBasicAuthUserInfo are set up as GitHub secrets and passed as arguments -->
         <schemaRegistryUrl></schemaRegistryUrl>
         <schemaRegistryBasicAuthUserInfo></schemaRegistryBasicAuthUserInfo>
-        <latestSchema>src/main/resources/prod/schemas/activities-v0.avsc</latestSchema>
+        <latestSchema>src/main/resources/prod/schemas/activities-v1.avsc</latestSchema>
     </properties>
 
     <pluginRepositories>
