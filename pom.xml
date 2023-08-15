@@ -29,6 +29,7 @@
                 <artifactId>kafka-schema-registry-maven-plugin</artifactId>
                 <version>7.4.1</version>
                 <configuration>
+
                     <!-- Used by all goals -->
                     <schemaRegistryUrls>
                         <param>${schemaRegistryUrl}</param>
@@ -67,6 +68,7 @@
                     <messagePath>src/main/resources/prod/messages/messages.txt</messagePath>
                     <schemaType>avro</schemaType>
                     <outputPath>src/main/resources/prod/messages/schema_output.json</outputPath>
+
                 </configuration>
             </plugin>
         </plugins>
