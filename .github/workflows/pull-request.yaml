@@ -34,11 +34,7 @@ jobs:
       # Step 4: Test Local Schema Compatibility
       - name: Test Local Schema Compatibility
         run: mvn io.confluent:kafka-schema-registry-maven-plugin:test-local-compatibility
-
-      # Step 5: Set Compatibility (May fail for the first run)
-      - name: Set Compatibility
-        run: mvn io.confluent:kafka-schema-registry-maven-plugin:set-compatibility "-DschemaRegistryUrl=$SCHEMA_REGISTRY_URL" "-DschemaRegistryBasicAuthUserInfo=$SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO"
-
-      # Step 6: Test Schema Compatibility
+        
+      # Step 5: Test Schema Compatibility
       - name: Test Schema Compatibility
         run: mvn io.confluent:kafka-schema-registry-maven-plugin:test-compatibility "-DschemaRegistryUrl=$SCHEMA_REGISTRY_URL" "-DschemaRegistryBasicAuthUserInfo=$SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO"
