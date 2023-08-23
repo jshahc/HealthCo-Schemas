@@ -53,7 +53,7 @@
                         <activities-value>src/main/resources/dev/schemas</activities-value>
                     </previousSchemaPaths>
 
-                    <!-- Used by test-local-compatibility, set-compatibility, test-compatibility goal-->
+                    <!-- Used by test-local-compatibility, test-compatibility goal-->
                     <!-- Specifies the compatibility level for goals-->
                     <compatibilityLevels>
                         <activities-value>BACKWARD</activities-value>
