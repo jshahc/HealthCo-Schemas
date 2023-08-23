@@ -14,8 +14,7 @@ registered. This workflow involves the following steps:
 2. **Local Compatibility Test**: Test the compatibility of the new schema with existing schemas in the local
    environment. Provide details such as the location of existing schemas, the schema to be tested, compatibility level,
    and schema type.
-3. **Set Compatibility Level**: Set the compatibility level for the subject. Specify the desired compatibility level.
-4. **Cloud Compatibility Test**: Verify compatibility with the subject on the cloud. Provide subject name, compatibility
+3. **Cloud Compatibility Test**: Verify compatibility with the subject on the cloud. Provide subject name, compatibility
    level, and schema type for testing.
 
 **Note**: Ensure that the specified subject exists; otherwise, the workflow will fail.
